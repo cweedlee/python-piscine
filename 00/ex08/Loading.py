@@ -1,5 +1,5 @@
 import shutil
-rom time import time, sleep
+from time import time, sleep
 
 
 def ft_tqdm(lst: range) -> None:
@@ -21,10 +21,11 @@ def ft_tqdm(lst: range) -> None:
         progress_percentage = float(pos) / float(length) * 100.0
         time_per_unit = time() - time_passed
         time_passed = time()
+        time_passed_formatted = f"{time_passed:.2f}"
         time_left = time_per_unit * (length - pos)
         ncol = columns - 5 - 2 - pos - 1 - length - 2 - len(str(time_left)) - len(str(time_passed)) - 3 - len(str(time_per_unit)) - 5
-        progress_ncol = int(ncol * progress_percentage) / 100
-        res = f"{progress_percentage:3.0f}%|{'█':10}| {pos}/{length} [{time_passed:.2f}<{time_left:.2f}, {time_per_unit}it/s]"
+        progress_ncol = int(ncol * progress_percentage / 100)
+        res = f"{progress_percentage:3.0f}%|{'█':10}{ncol}| {pos}/{length} [{time_passed_formatted}<{time_left:.2f}, {time_per_unit}it/s]"
         #res = f"{progress_percentage}"
         yield res
 
